@@ -1,30 +1,22 @@
 package com.example.skycam
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
-import com.chuckerteam.chucker.api.ChuckerCollector
+import com.example.skycam.BuildConfig.DEBUG
 import com.example.skycam.databinding.ActivityMainBinding
-import com.example.skycam.http.base.BaseHttpClient
-import com.example.skycam.http.base.BaseRetrofit
-import com.example.skycam.http.base.RxJavaCustomCallAdapterFactory
-import com.example.skycam.retrofit.LoginResponse
-import com.example.skycam.retrofit.LoginService
+import com.example.skycam.retrofit.APIService
 import com.example.skycam.retrofit.UserInfo
-import com.google.gson.Gson
-import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.launch
+
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.*
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
-
+    private val gson: Gson = Gson()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -36,62 +28,65 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        val user = mBinding.etEmail.text.toString().trim()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constans.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(getClient())
+            .build()
+
+        val service = retrofit.create(APIService::class.java)
+
+        service.login(UserInfo("skiper0125",".SkIpEr0125.666.")).enqueue(
+            object : Callback<DataResponseServer>{
+                override fun onResponse(call: Call<DataResponseServer>, response: Response<DataResponseServer>) {
+
+                    val result = response.body()
+                    val responceCode = response.code()
+                    mBinding.tvStatus.text = result?.Status.toString()
+                    mBinding.tvName.text = result?.Message.toString()
+                    mBinding.tvIdUser.text = responceCode.toString()
+                    mBinding.tvUser.text = result?.Data?.user.toString()
+                    mBinding.tvUnits.text = result?.Data?.units.toString()
+                }
+
+                override fun onFailure(call: Call<DataResponseServer>, t: Throwable) {
+                    Log.e("Retrofit", "Problemas con el servidor")
+
+                }
+            }
+        )
+
+/*        val user = mBinding.etEmail.text.toString().trim()
         val password = mBinding.etPassword.text.toString().trim()
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Constans.BASE_URL)
-            .addCallAdapterFactory(RxJavaCustomCallAdapterFactory.create()) //Has to be on top of the other adapters
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.createWithScheduler(Schedulers.io()))
-
+            .client(getClient())
             .build()
 
         val service = retrofit.create(LoginService::class.java)
 
         lifecycleScope.launch {
             try {
-                val result = service.login(UserInfo("skiper0125", ".SkIpEr0125.666."))
+                val response = service.login(UserInfoDto("skiper0125", ".SkIpEr0125.666."))
 
-              mBinding.tvName.text = result.toString()
-
+                mBinding.tvName.text = response.toString()
+                Log.i("response", response.toString())
 
             } catch (e: Exception) {
                 (e as? HttpException)?.let { checkError(e) }
-
-
             }
-        }
-
-   /*     service.login(UserInfo(user, password)).enqueue(
-            object : Callback<LoginResponse> {
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                   when(response.code()){
-                       200 -> {
-                           val result = response.body()
-                           Toast.makeText(this@MainActivity, "Peticion exitosa", Toast.LENGTH_SHORT).show()
-                       }
-                       400 -> {
-                           Toast.makeText(this@MainActivity, "Error en la peticion", Toast.LENGTH_SHORT).show()
-
-                       }
-                   }
-
-                }
-
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Log.e("Retrofit", "Probele,as con el servidor")
-                }
-            }
-        )*/
+        }*/
     }
 
-    private suspend fun checkError(e: HttpException)= when(e.code()){
-        400 -> {
-            mBinding.tvName.text = "error 400"
-        }
-        else -> {
-            mBinding.tvName.text = "error desconocido"
-        }
+    private fun getClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(HeaderInterceptor())
+            .addInterceptor(
+            HttpLoggingInterceptor().apply { level =
+                if (DEBUG) HttpLoggingInterceptor.Level.BODY
+                else HttpLoggingInterceptor.Level.NONE })
+            .build()
     }
 }
