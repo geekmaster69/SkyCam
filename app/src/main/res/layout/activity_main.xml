@@ -6,20 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+
     android:padding="@dimen/common_pading_default"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:textAppearance="?attr/textAppearanceHeadline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/common_pading_min"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Nombre" />
+
     <TextView
         android:id="@+id/tvName"
         android:textAppearance="?attr/textAppearanceHeadline5"
@@ -39,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Usuario" />
+        tools:text="Id de usuario" />
 
     <TextView
         android:id="@+id/tvUser"
@@ -50,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvIdUser"
-        tools:text="Id de de usuario" />
+        tools:text="Usuario" />
 
     <TextView
         android:id="@+id/tvUnits"
@@ -63,63 +54,23 @@
         app:layout_constraintTop_toBottomOf="@id/tvUser"
         tools:text="Units" />
 
-
-
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilEmail"
-        android:layout_width="240dp"
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:boxCornerRadiusBottomStart="@dimen/common_pading_default"
-        app:boxCornerRadiusBottomEnd="@dimen/common_pading_default"
-        app:boxCornerRadiusTopStart="@dimen/common_pading_default"
-        app:boxCornerRadiusTopEnd="@dimen/common_pading_default"
-        app:layout_constraintBottom_toTopOf="@id/tilPassword"
-        android:hint="Email"
-        android:layout_marginBottom="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmail"
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/azul"
+        android:textSize="18sp"
+        android:text="@string/login"
+        style="@style/Widget.MaterialComponents.Button"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPassword"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnLogin"
-        app:boxCornerRadiusBottomStart="@dimen/common_pading_default"
-        app:boxCornerRadiusBottomEnd="@dimen/common_pading_default"
-        app:boxCornerRadiusTopStart="@dimen/common_pading_default"
-        app:boxCornerRadiusTopEnd="@dimen/common_pading_default"
-        android:hint="Password"
-        android:layout_marginBottom="16dp"
-        app:endIconMode="password_toggle"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
-        android:text="Login"
-        app:cornerRadius="@dimen/common_pading_default"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
 
 
 

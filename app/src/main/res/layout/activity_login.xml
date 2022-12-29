@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/common_pading_default"
+    android:background="@color/teal_200"
+    android:gravity="center_horizontal"
+
+    tools:context=".LoginActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:paddingTop="20dp"
+        android:src="@drawable/login_img" />
+
+    <TextView
+        android:id="@+id/tvBienvenida"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/bienvenido_lbl"
+        android:textColor="#ffffff"
+        android:textSize="38sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:gravity="center_vertical">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:boxCornerRadiusBottomStart="@dimen/common_pading_default"
+            app:boxCornerRadiusBottomEnd="@dimen/common_pading_default"
+            app:boxCornerRadiusTopStart="@dimen/common_pading_default"
+            app:boxCornerRadiusTopEnd="@dimen/common_pading_default"
+            app:layout_constraintBottom_toTopOf="@id/tilPassword"
+            android:hint="Email"
+            android:layout_marginBottom="16dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:boxCornerRadiusBottomStart="@dimen/common_pading_default"
+            app:boxCornerRadiusBottomEnd="@dimen/common_pading_default"
+            app:boxCornerRadiusTopStart="@dimen/common_pading_default"
+            app:boxCornerRadiusTopEnd="@dimen/common_pading_default"
+            android:hint="Password"
+            android:layout_marginBottom="16dp"
+            app:endIconMode="password_toggle">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/azul"
+            android:textSize="18sp"
+            android:text="@string/login"
+            style="@style/Widget.MaterialComponents.Button"/>
+
+    </LinearLayout>
+
+</LinearLayout>

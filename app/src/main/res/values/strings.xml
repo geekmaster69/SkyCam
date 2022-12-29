@@ -10,4 +10,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="main_error_server">Error en la peticion</string>
+    <string name="bienvenido_lbl">Bienvenido</string>
+    <string name="usuario">usuario</string>
+    <string name="password">Password</string>
+    <string name="login">Entrar</string>
 </resources>
