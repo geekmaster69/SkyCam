@@ -6,9 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     android:padding="@dimen/common_pading_default"
     tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnLogaut"
+        android:text="Exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
     <TextView
@@ -43,34 +48,12 @@
         app:layout_constraintTop_toBottomOf="@id/tvIdUser"
         tools:text="Usuario" />
 
-    <TextView
-        android:id="@+id/tvUnits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/common_pading_min"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/tvUser"
-        tools:text="Units" />
-
-    <Button
-        android:id="@+id/btn_login"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCompany"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/azul"
-        android:textSize="18sp"
-        android:text="@string/login"
-        style="@style/Widget.MaterialComponents.Button"/>
-
-
-
-
-
-
+        tools:listitem="@layout/item_company"
+        />
 
 
 
